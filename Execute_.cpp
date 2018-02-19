@@ -114,7 +114,8 @@ bool Execute::createArgVec (string input){
         }
     }
     
-    executionVec = execArr; 
+    executionVec = execArr;
+    return exitBool; 
 };
 
 string Execute::returnCommand(int input){
