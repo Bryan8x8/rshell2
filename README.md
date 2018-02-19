@@ -8,6 +8,8 @@ In this assignment, please finish two things:
 
 rshell Summary:
 
+IMPORTANT: to end rshell session type 'terminate' command.
+
 the functionality of this rshell is split into four classes
 	
 	- Package
