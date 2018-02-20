@@ -26,3 +26,7 @@ Executer Class: This class receives a vector of packages from the Packager class
 Controller: This class is essentially the conductor, it takes the functionality of the Package, Packager, and Executer class and calls commands in the order required to run rshell. The controller contains a single function, receiveAndRun which will receive and execute input and  return a true boolean value if the user passes a 'terminate' command.
 
 rShell.cpp: this file creates a container and continously loops its receiveAndRun function until it returns a true value.
+
+Bugs:
+
+	- echo '\n' wll not result in a space
