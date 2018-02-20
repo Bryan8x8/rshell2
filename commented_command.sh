@@ -4,3 +4,8 @@ echo print this #not this
 echo #wut
 #pwd
 ls #-l
+echo test || #nothing 
+#nothing should && happen
+echo testing && echo testing2 #nothing
+#terminate
+

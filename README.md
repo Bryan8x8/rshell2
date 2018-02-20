@@ -29,4 +29,4 @@ rShell.cpp: this file creates a container and continously loops its receiveAndRu
 
 Bugs:
 
-	- echo '\n' wll not result in a space
+	- echo '\n' will result in a space in rshell, while if I run this command in the terminal I receive a \n

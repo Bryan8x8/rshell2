@@ -8,3 +8,5 @@ touch testfile
 echo creating testfile, writing into it, and printing contents
 echo hello world > testfile
 cat testfile
+echo '\n'
+echo bug detected!
