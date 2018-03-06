@@ -34,7 +34,7 @@ class Execute{
         //This function is critical to the exit process, it will return a true value if it detects that the 'terminate' command has been entered.
         string returnCommand(int); //this returns a string from within the holdCommand vector
         bool executePackage(); //no functionlity implemented yet
-
+        bool executeSingle(string);
 };
 
 #endif
