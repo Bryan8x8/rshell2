@@ -29,7 +29,7 @@ bool Execute::executeCommands(){
     { /* child process */
             //std::cout << "Hit Exec" << std::endl;
             execvp(execArgs[0], (char**)execArgs);
-
+            
             write(mypipefd[1], "f", 12);
             close(mypipefd[0]);
             exit(127); /* only if execv fails */
@@ -111,11 +111,11 @@ bool Execute::createArgVec (string input){
         if(subString == "terminate")
         {
             exitBool = true;
+            //std::cout << "terminate detected" << std::endl;
         }
     }
-    
-    executionVec = execArr;
-    return exitBool; 
+    executionVec = execArr; 
+    return exitBool;    
 };
 
 string Execute::returnCommand(int input){
@@ -131,7 +131,7 @@ bool Execute::executePackage(){
             exitBool = createArgVec(holdCommands[0]);
             if(exitBool){ 
              i = holdPackages.size(); 
-             exitBool = true;
+             //exitBool = true;
             }
             loadConstChar();
             executeCommands();    
@@ -143,7 +143,7 @@ bool Execute::executePackage(){
             exitBool = createArgVec(holdCommands[0]);
             if(exitBool){ 
              i = holdPackages.size();  
-             exitBool = true;
+             //exitBool = true;
             }
             loadConstChar();
             checkBool = executeCommands(); //first command in the vector has been executed, and bool is loaded indicating whether the first command failed or succeeded.
@@ -152,23 +152,23 @@ bool Execute::executePackage(){
                 {
                     if(checkBool && holdLogic[k-1] == '&')
                     {
-                    exitBool = createArgVec(holdCommands[k]);
-                    if(exitBool){ 
-                        k = holdCommands.size(); 
-                        exitBool = true;
-                    }
-                    loadConstChar();
-                    checkBool = executeCommands(); 
+                        exitBool = createArgVec(holdCommands[k]);
+                        if(exitBool){ 
+                            k = holdCommands.size(); 
+                            //exitBool = true;
+                        }
+                        loadConstChar();
+                        checkBool = executeCommands(); 
                     }
                     if(!checkBool && holdLogic[k-1] == '|')
                     {
-                    exitBool = createArgVec(holdCommands[k]);
-                    if(exitBool){ 
-                        k = holdCommands.size(); 
-                        exitBool = true;
-                    }
-                    loadConstChar();
-                    checkBool = executeCommands();    
+                        exitBool = createArgVec(holdCommands[k]);
+                        if(exitBool){ 
+                            k = holdCommands.size(); 
+                            //exitBool = true;
+                        }
+                        loadConstChar();
+                        checkBool = executeCommands();    
                     }
                 }
             }
@@ -176,3 +176,10 @@ bool Execute::executePackage(){
     }
     return exitBool;
 };
+
+bool Execute::executeSingle(string input)
+{
+    createArgVec(input);
+    loadConstChar();
+    return executeCommands();
+}
