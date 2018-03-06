@@ -126,3 +126,123 @@ void Packager::displayCmdVector(){
    }
    //...
 }
+
+bool Packager::detectParen(string input){
+    bool detector = false;
+    bool initDetect = false;
+    for(int i = 0; i<input.length(); i++)
+    {
+        if(input[i] == '('){
+            initDetect = true; //first parenthesis hit
+        }
+        if(initDetect && input[i] == ')') //only test for second parenthesis if there exists an intial one
+        {
+            detector = true; //two parenthesis hit in the correct order!
+            //std::cout << "paren hit" << std::endl;
+        }
+    }
+    return detector;
+}
+
+string Packager::parseParen(string input){
+    int i = 0;
+    bool initialBool = false;
+    bool twoParBool;
+    int startSplit=0;
+    int endSplit=0; 
+    string splitString;
+    //std::cout<< initialBool << std::endl;
+    //cout << "hit" << endl;
+    while ((i<input.length()) && (input.length() != 0))
+    {
+        char testValue = input[i];
+        char currentChar; 
+        if((testValue == '('))
+        {
+            if(!initialBool){
+                startSplit = i+1; 
+                //std::cout<< "hit 1" << std::endl;
+                initialBool = true;
+            }
+            else
+            {
+                initialBool = false; 
+                //std::cout<<"hit 2" << std::endl;
+            }
+        }
+        if(testValue == ')')
+        {
+            if(!initialBool){
+                
+                initialBool = true;
+                //std::cout<<"hit 3" << std::endl;
+            }
+            else{
+                //std::cout<<"hit 4" << std::endl;
+                endSplit = i - startSplit;      
+                //std::cout<< endSplit << std::endl;
+                i = input.length();
+            }
+        }
+        i++;
+    }
+        
+        return splitString = input.substr(startSplit, endSplit);
+}
+
+string Packager::parenCmdParse(string input){
+    bool charHit = false;
+    int startSplit = 0;
+    int endSplit;
+    int i = 0;
+    while((!charHit) && (i<input.length()))
+    {
+        if(input[i] == '&')
+        {
+            //std::cout<<"hit 1"<<std::endl;
+            if(input[i+1] == '&')
+            {
+                //std::cout<<"hit 2"<<std::endl;
+                charHit = true;
+                endSplit = i;
+            }
+        }
+        if(input[i] == '|')
+        {
+            if(input[i+1] == '|')
+            {
+                charHit = true;
+                endSplit = i;
+            }
+        }
+        if(input[i] == '(')
+        {
+            charHit = true;
+            endSplit = i;
+        }
+        i++;
+    }
+    return input.substr(startSplit, endSplit);
+}
+
+string Packager::removeWhiteSpace(string input)
+{
+    int strLength = input.length();
+    int i = 0;
+    while(input[i] == ' ')
+    {
+        i++;
+    }
+    
+    return input = input.substr(i, strLength-i);
+}
+
+
+
+
+
+
+
+
+
+
